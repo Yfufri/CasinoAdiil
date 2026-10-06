@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-casino-dark text-white font-['Inter',sans-serif] min-h-screen;
+  }
+
+  h1, h2, h3 {
+    @apply font-casino;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-casino-gold text-black hover:brightness-110 active:scale-95;
+  }
+  .btn-green {
+    @apply btn bg-casino-green text-white hover:brightness-110 active:scale-95;
+  }
+  .btn-red {
+    @apply btn bg-casino-red text-white hover:brightness-110 active:scale-95;
+  }
+  .btn-ghost {
+    @apply btn border border-casino-border text-gray-300 hover:border-casino-gold hover:text-casino-gold;
+  }
+  .card {
+    @apply bg-casino-surface border border-casino-border rounded-xl p-4;
+  }
+  .input {
+    @apply bg-casino-dark border border-casino-border rounded-lg px-3 py-2 text-white w-full focus:outline-none focus:border-casino-gold transition-colors;
+  }
+  .badge-red {
+    @apply inline-block w-4 h-4 rounded-full bg-red-600;
+  }
+  .badge-black {
+    @apply inline-block w-4 h-4 rounded-full bg-gray-800 border border-gray-600;
+  }
+  .badge-green {
+    @apply inline-block w-4 h-4 rounded-full bg-green-600;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #c9a84c; }
+
+/* Roulette wheel animation */
+@keyframes spin-wheel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-ball {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+.spin-wheel { animation: spin-wheel 3s cubic-bezier(0.17, 0.67, 0.12, 1) forwards; }
+.spin-ball { animation: spin-ball 3s cubic-bezier(0.17, 0.67, 0.12, 1) forwards; }
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(201, 168, 76, 0); }
+}
+.pulse-gold { animation: pulse-gold 2s infinite; }
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fade-in-up 0.4s ease-out forwards; }
+
+@keyframes win-flash {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(201, 168, 76, 0.3); }
+}
+.win-flash { animation: win-flash 0.5s ease-in-out 3; }
