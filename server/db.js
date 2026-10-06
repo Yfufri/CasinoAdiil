@@ -1,8 +1,10 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
 
-const DB_PATH = path.join(__dirname, 'casino.db');
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'casino.db');
+fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
 const db = new Database(DB_PATH);
 
 db.pragma('journal_mode = WAL');
@@ -65,9 +67,11 @@ db.exec(`
 // Seed admin if not exists
 const adminExists = db.prepare("SELECT id FROM users WHERE role='admin' LIMIT 1").get();
 if (!adminExists) {
-  const hash = bcrypt.hashSync('admin1234', 10);
-  db.prepare("INSERT INTO users (username, password, role, credits) VALUES (?, ?, 'admin', 0)").run('admin', hash);
-  console.log('[DB] Admin créé : admin / admin1234');
+  const adminUser = process.env.ADMIN_USERNAME || 'admin';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin1234';
+  const hash = bcrypt.hashSync(adminPassword, 10);
+  db.prepare("INSERT INTO users (username, password, role, credits) VALUES (?, ?, 'admin', 0)").run(adminUser, hash);
+  console.log(`[DB] Admin créé : ${adminUser}${process.env.ADMIN_PASSWORD ? '' : ' / admin1234'}`);
 }
 
 module.exports = db;

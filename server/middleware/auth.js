@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET || 'casino_adiil_secret_2024';
+if (!process.env.JWT_SECRET) {
+  console.warn('[AUTH] JWT_SECRET non défini : secret par défaut utilisé (à éviter en prod)');
+}
 
 function requireAuth(req, res, next) {
   const header = req.headers.authorization;

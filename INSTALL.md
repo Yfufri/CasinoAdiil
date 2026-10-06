@@ -1,5 +1,7 @@
 # Casino Adiil — Installation
 
+> Pour la mise en ligne avec Docker + nom de domaine, voir [DEPLOY.md](DEPLOY.md).
+
 ## Prérequis
 - Node.js 18+ installé
 
@@ -39,7 +41,7 @@ Ouvrez http://localhost:3001 dans votre navigateur.
 
 | Utilisateur | Mot de passe | Rôle |
 |---|---|---|
-| admin | admin1234 | Admin |
+| admin | admin1234 (ou `ADMIN_PASSWORD` du `.env`) | Admin |
 
 Créez les comptes participants depuis `/admin/users`.
 
