@@ -1,7 +1,0 @@
-# Reverse proxy sur le Raspberry Pi -> PC Windows (Docker) via Tailscale.
-# Remplacer casino.example.com par le vrai (sous-)domaine.
-# Caddy gère automatiquement le certificat HTTPS (Let's Encrypt) et les WebSockets.
-casino.example.com {
-	encode gzip
-	reverse_proxy 100.103.36.13:3001
-}
